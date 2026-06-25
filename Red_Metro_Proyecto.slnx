@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="Biblioteca/Biblioteca.csproj" />
-  <Project Path="Red_Metro_EF/Red_Metro_EF.csproj" />
+  <Project Path="Biblioteca/Biblioteca.csproj" Id="09c45d2d-f2cf-40bc-a0d9-30b4b7e688b3" />
+  <Project Path="Red_Metro_EF/Red_Metro_EF.csproj" Id="f3d83154-aafd-4352-b9d6-bb6aa1b51111" />
 </Solution>
