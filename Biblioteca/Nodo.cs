@@ -17,5 +17,14 @@ namespace Biblioteca
         public Conexion dato;
         public NodoConexion sig = null;
     }
-
+    public class NodoCola        // nodo de la cola (BFS)
+    {
+        public Estacion dato;
+        public NodoCola sig = null;
+    }
+    public class NodoPila        // nodo de la pila (DFS)
+    {
+        public Estacion dato;
+        public NodoPila sig = null;
+    }
 }

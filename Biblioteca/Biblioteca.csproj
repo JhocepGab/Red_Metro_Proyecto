@@ -44,6 +44,7 @@
     <Compile Include="Estacion.cs" />
     <Compile Include="ListaConexiones.cs" />
     <Compile Include="Nodo.cs" />
+    <Compile Include="PilaEstaciones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
