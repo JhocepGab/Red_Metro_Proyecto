@@ -27,4 +27,21 @@ namespace Biblioteca
         public Estacion dato;
         public NodoPila sig = null;
     }
+    public class NodoLista       // nodo de la lista enlazada (ruta)
+    {
+        public Estacion dato;
+        public NodoLista sig = null;
+    }
+
+    public class NodoConexion    // nodo de la lista de adyacencia
+    {
+        public Conexion dato;
+        public NodoConexion sig = null;
+    }
+
+    public class NodoRanking     // nodo de la lista ordenada (ranking)
+    {
+        public RegistroRuta dato;
+        public NodoRanking sig = null;
+    }
 }
