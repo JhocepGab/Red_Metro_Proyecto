@@ -50,6 +50,7 @@
     <Compile Include="Nodo.cs" />
     <Compile Include="PilaEstaciones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Red.cs" />
     <Compile Include="RegistroRuta.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
