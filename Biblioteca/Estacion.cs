@@ -4,16 +4,15 @@
     {
         public int codigo;
         public string nombre;
-        public ListaConexiones conexiones = new ListaConexiones();
-        public bool visitada = false;
-        public Estacion anterior = null;
+        public string zona;
 
         public override string ToString()
         {
-            return string.Format("[{0}] {1}", codigo, nombre);
+            return string.Format("{0} (Zona: {1})", nombre, zona);
         }
 
-        //compara las estaciones por su codigo
+        //el arbol (ABB) compara las estaciones por su codigo,
+        //igual que Persona se compara por el dni
         public static bool operator >(Estacion e1, Estacion e2)
         {
             if (e1.codigo > e2.codigo) return true;

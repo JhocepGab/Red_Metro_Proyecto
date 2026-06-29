@@ -42,15 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arbol.cs" />
-    <Compile Include="Conexion.cs" />
+    <Compile Include="Arista.cs" />
     <Compile Include="Estacion.cs" />
-    <Compile Include="ListaConexiones.cs" />
-    <Compile Include="ListaRuta.cs" />
+    <Compile Include="ListaAristas.cs" />
     <Compile Include="Nodo.cs" />
-    <Compile Include="PilaEstaciones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Red.cs" />
-    <Compile Include="RegistroRuta.cs" />
+    <Compile Include="Vertice.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
