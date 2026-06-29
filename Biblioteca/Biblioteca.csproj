@@ -43,9 +43,13 @@
   <ItemGroup>
     <Compile Include="Arbol.cs" />
     <Compile Include="Arista.cs" />
+    <Compile Include="Cola.cs" />
     <Compile Include="Estacion.cs" />
+    <Compile Include="Grafo.cs" />
     <Compile Include="ListaAristas.cs" />
+    <Compile Include="ListaSimple.cs" />
     <Compile Include="Nodo.cs" />
+    <Compile Include="Pila.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vertice.cs" />
   </ItemGroup>
