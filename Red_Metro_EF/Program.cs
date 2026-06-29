@@ -49,7 +49,8 @@ namespace Red_Metro_EF
 
                     case 3:
                         g.VerConexiones();
-                        Console.ReadKey();
+                        Console.WriteLine("\nPresione ENTER para continuar...");
+                        Console.ReadLine();
                         break;
 
                     case 4:
