@@ -12,11 +12,11 @@ namespace Red_Metro_EF
         static void Main(string[] args)
         {
             Grafo g = new Grafo();
-            int op = -1;
+            int op;
 
-            while (op != 0)
+            do
             {
-                Console.WriteLine();
+                Console.Clear();
                 Console.WriteLine("==================================================");
                 Console.WriteLine("        RED DE METRO  -  Estructura de Datos");
                 Console.WriteLine("==================================================");
@@ -38,36 +38,44 @@ namespace Red_Metro_EF
                     case 1:
                         Console.WriteLine("\n--- ESTACIONES DEL METRO ---");
                         g.MostrarEstaciones();
+                        Console.ReadKey();
                         break;
 
                     case 2:
                         Console.WriteLine("\n--- MATRIZ DE ADYACENCIA ---");
                         g.MostrarMatriz();
+                        Console.ReadKey();
                         break;
 
                     case 3:
                         g.VerConexiones();
+                        Console.ReadKey();
                         break;
 
                     case 4:
                         g.BuscarRuta("BFS");
+                        Console.ReadKey();
                         break;
 
                     case 5:
                         g.BuscarRuta("DFS");
+                        Console.ReadKey();
                         break;
 
                     case 6:
                         g.ViajarManual();
+                        Console.ReadKey();
                         break;
 
                     case 7:
                         g.BuscarPorCodigo();
+                        Console.ReadKey();
                         break;
 
                     case 8:
                         Console.WriteLine("\n--- ESTACIONES ORDENADAS POR CODIGO (recorrido InOrden del arbol) ---");
                         g.MostrarOrdenadasPorCodigo();
+                        Console.ReadKey();
                         break;
 
                     case 0:
@@ -78,13 +86,7 @@ namespace Red_Metro_EF
                         Console.WriteLine("\nOpcion no valida.");
                         break;
                 }
-
-                if (op != 0)
-                {
-                    Console.WriteLine("\nPresione ENTER para continuar...");
-                    Console.ReadLine();
-                }
-            }
+            } while (op != 0);
         }
     }
 }
