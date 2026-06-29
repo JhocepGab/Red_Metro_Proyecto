@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arbol.cs" />
-    <Compile Include="ColaEstaciones.cs" />
     <Compile Include="Conexion.cs" />
     <Compile Include="Estacion.cs" />
     <Compile Include="ListaConexiones.cs" />

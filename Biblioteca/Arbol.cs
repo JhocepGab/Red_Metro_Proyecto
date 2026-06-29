@@ -32,42 +32,48 @@ namespace Biblioteca
                 {
                     InsertarRecursivo(ref raiz.der, e);
                 }
-                // si es igual no se hace nada (codigo repetido)
+                //si el codigo ya existe, no se inserta de nuevo
             }
         }
 
         public Estacion Buscar(int codigo)
         {
-            Estacion buscada = new Estacion();
-            buscada.codigo = codigo;
-            return BuscarRecursivo(raiz_principal, buscada);
+            Estacion e = new Estacion();
+            e.codigo = codigo;
+            return BuscarRecursivo(raiz_principal, e);
         }
         public Estacion BuscarRecursivo(Nodo raiz, Estacion e)
         {
-            if (raiz == null) return null;
-
-            if (e < raiz.dato)
+            if (raiz == null)
             {
-                return BuscarRecursivo(raiz.izq, e);
-            }
-            else if (e > raiz.dato)
-            {
-                return BuscarRecursivo(raiz.der, e);
+                return null;
             }
             else
             {
-                return raiz.dato;
+                if (e < raiz.dato)
+                {
+                    return BuscarRecursivo(raiz.izq, e);
+                }
+                else if (e > raiz.dato)
+                {
+                    return BuscarRecursivo(raiz.der, e);
+                }
+                else
+                {
+                    return raiz.dato;
+                }
             }
         }
 
-        // recorre en orden y va metiendo las estaciones en la lista
-        public void InOrden(Nodo raiz, ListaRuta lista)
+        //recorrido en orden (izquierda - raiz - derecha):
+        //muestra las estaciones ordenadas por codigo
+        public void InOrden(Nodo raiz)
         {
             if (raiz != null)
             {
-                InOrden(raiz.izq, lista);
-                lista.Agregar(raiz.dato);
-                InOrden(raiz.der, lista);
+                InOrden(raiz.izq);
+                Console.WriteLine(raiz.dato);
+                InOrden(raiz.der);
             }
         }
     }
