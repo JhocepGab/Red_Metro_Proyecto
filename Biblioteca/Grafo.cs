@@ -208,6 +208,95 @@ namespace Biblioteca
         }
 
         //------------------------------------------------------
+        // OPCIONES DEL MENU (piden los datos y muestran el resultado)
+        //------------------------------------------------------
+        //opcion 3: muestra la lista de adyacencia de una estacion
+        public void VerConexiones()
+        {
+            Console.WriteLine("\n--- ESTACIONES ---");
+            MostrarEstaciones();
+            Console.Write("\nNumero de la estacion: ");
+            int n = int.Parse(Console.ReadLine());
+
+            Vertice v = ObtenerPorNumero(n);
+            if (v == null)
+            {
+                Console.WriteLine("Esa estacion no existe.");
+                return;
+            }
+            Console.WriteLine("\nConexiones de " + v.dato + ":");
+            MostrarConexiones(v);
+        }
+
+        //opcion 4 y 5: pide origen y destino y calcula la ruta (BFS o DFS)
+        public void BuscarRuta(string metodo)
+        {
+            Console.WriteLine("\n--- ESTACIONES ---");
+            MostrarEstaciones();
+            Console.Write("\nNumero de la estacion de ORIGEN: ");
+            int no = int.Parse(Console.ReadLine());
+            Console.Write("Numero de la estacion de DESTINO: ");
+            int nd = int.Parse(Console.ReadLine());
+
+            Vertice origen = ObtenerPorNumero(no);
+            Vertice destino = ObtenerPorNumero(nd);
+            if (origen == null || destino == null)
+            {
+                Console.WriteLine("Alguna estacion no existe.");
+                return;
+            }
+
+            float minutos = 0;
+            ListaSimple ruta;
+            if (metodo == "BFS")
+            {
+                ruta = RutaMasCorta(origen, destino, ref minutos);
+            }
+            else
+            {
+                ruta = RutaEnProfundidad(origen, destino, ref minutos);
+            }
+
+            if (ruta == null)
+            {
+                Console.WriteLine("No hay ruta entre esas estaciones.");
+                return;
+            }
+
+            Console.WriteLine("\n=== RUTA CON " + metodo + " ===");
+            ruta.Mostrar();
+            Console.WriteLine("Estaciones en la ruta: " + ruta.Contar());
+            Console.WriteLine("Tiempo total: " + minutos + " min");
+        }
+
+        //opcion 6: el recorrido manual (usa el Recorrer de la base)
+        public void ViajarManual()
+        {
+            Console.WriteLine("\n--- VIAJE MANUAL ---");
+            Console.WriteLine("Empiezas en la primera estacion y vas eligiendo a donde viajar.");
+            float total = 0;
+            Recorrer(GetInicio(), ref total);
+            Console.WriteLine("\nTiempo total del viaje: " + total + " min");
+        }
+
+        //opcion 7: busca una estacion por su codigo USANDO EL ARBOL (ABB)
+        public void BuscarPorCodigo()
+        {
+            Console.WriteLine("\n--- ESTACIONES (el numero es el codigo) ---");
+            MostrarEstaciones();
+            Console.Write("\nIngrese el codigo de la estacion a buscar: ");
+            int cod = int.Parse(Console.ReadLine());
+
+            Estacion e = BuscarEstacion(cod);
+            if (e == null)
+            {
+                Console.WriteLine("No existe una estacion con ese codigo.");
+                return;
+            }
+            Console.WriteLine("Encontrada (codigo " + cod + "): " + e);
+        }
+
+        //------------------------------------------------------
         // RECORRIDOS
         //------------------------------------------------------
         //pone visitado=false y anterior=null en todas las estaciones
