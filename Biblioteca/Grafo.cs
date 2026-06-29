@@ -8,30 +8,20 @@ namespace Biblioteca
 {
     public class Grafo
     {
-        public ListaSimple l_vertices = new ListaSimple();   //estaciones del grafo
-        public Arbol directorio = new Arbol();               //directorio de estaciones por codigo (ABB)
+        public ListaSimple l_vertices = new ListaSimple();
+        public Arbol directorio = new Arbol();
         int[,] ma;
         int cantidad;
 
         public Grafo()
         {
-            //1) crear las estaciones (los vertices del grafo)
             CrearEstaciones();
-
-            //2) preparar la matriz de adyacencia del tamano de las estaciones
             cantidad = l_vertices.Contar();
             ma = new int[cantidad, cantidad];
-
-            //3) conectar las estaciones (las aristas) y de paso llenar la matriz
             CrearConexiones();
         }
-
-        //------------------------------------------------------
-        // ARMADO DE LA RED
-        //------------------------------------------------------
         void CrearEstaciones()
         {
-            //cada estacion lleva un codigo (como el dni de un paciente)
             l_vertices.Insertar(NuevaEstacion(1, "Terminal Norte", "Norte"));
             l_vertices.Insertar(NuevaEstacion(2, "Universidad", "Norte"));
             l_vertices.Insertar(NuevaEstacion(3, "Plaza Central", "Centro"));
@@ -44,10 +34,6 @@ namespace Biblioteca
             l_vertices.Insertar(NuevaEstacion(10, "Aeropuerto", "Norte"));
             l_vertices.Insertar(NuevaEstacion(11, "Catedral", "Centro"));
             l_vertices.Insertar(NuevaEstacion(12, "Playa", "Sur"));
-
-            //se registran en el directorio (ABB) en el orden en que se
-            //"dieron de alta" (no en orden de codigo) para que el arbol
-            //quede ramificado y no como una lista
             int[] altas = { 6, 3, 9, 1, 5, 8, 11, 2, 4, 7, 10, 12 };
             for (int i = 0; i < altas.Length; i++)
             {
@@ -63,8 +49,6 @@ namespace Biblioteca
             e.zona = zona;
             return e;
         }
-
-        //busca una estacion por su codigo recorriendo la lista de vertices
         Estacion EstacionPorCodigo(int codigo)
         {
             Vertice temp = l_vertices.primero;
@@ -81,7 +65,6 @@ namespace Biblioteca
 
         void CrearConexiones()
         {
-            //el ultimo numero son los minutos entre las dos estaciones
             Conectar("Terminal Norte", "Universidad", 4);
             Conectar("Universidad", "Plaza Central", 3);
             Conectar("Plaza Central", "Mercado", 2);
@@ -96,8 +79,6 @@ namespace Biblioteca
             Conectar("Universidad", "Museo", 4);
             Conectar("Catedral", "Parque", 3);
         }
-
-        //conecta dos estaciones en los dos sentidos y marca la matriz
         public void Conectar(string nomA, string nomB, float minutos)
         {
             Vertice a = BuscarVertice(nomA);
@@ -112,11 +93,6 @@ namespace Biblioteca
             ma[ia, ib] = 1;
             ma[ib, ia] = 1;
         }
-
-        //------------------------------------------------------
-        // BUSQUEDAS AUXILIARES
-        //------------------------------------------------------
-        //busca una estacion por su nombre y devuelve su vertice
         public Vertice BuscarVertice(string nombre)
         {
             Vertice temp = l_vertices.primero;
@@ -130,8 +106,6 @@ namespace Biblioteca
             }
             return null;
         }
-
-        //devuelve la posicion (indice) de una estacion en la lista
         public int IndiceDe(string nombre)
         {
             int i = 0;
@@ -147,8 +121,6 @@ namespace Biblioteca
             }
             return -1;
         }
-
-        //devuelve el vertice que esta en la posicion 1, 2, 3...
         public Vertice ObtenerPorNumero(int numero)
         {
             int i = 1;
@@ -169,10 +141,6 @@ namespace Biblioteca
         {
             return l_vertices.primero;
         }
-
-        //------------------------------------------------------
-        // MOSTRAR
-        //------------------------------------------------------
         public void MostrarEstaciones()
         {
             l_vertices.Mostrar();
@@ -194,23 +162,14 @@ namespace Biblioteca
         {
             v.ls.Mostrar();
         }
-
-        //busca una estacion por codigo USANDO EL ARBOL (ABB)
         public Estacion BuscarEstacion(int codigo)
         {
             return directorio.Buscar(codigo);
         }
-
-        //muestra las estaciones ordenadas por codigo (recorrido InOrden del ABB)
         public void MostrarOrdenadasPorCodigo()
         {
             directorio.InOrden(directorio.raiz_principal);
         }
-
-        //------------------------------------------------------
-        // OPCIONES DEL MENU (piden los datos y muestran el resultado)
-        //------------------------------------------------------
-        //opcion 3: muestra la lista de adyacencia de una estacion
         public void VerConexiones()
         {
             Console.WriteLine("\n--- ESTACIONES ---");
@@ -227,8 +186,6 @@ namespace Biblioteca
             Console.WriteLine("\nConexiones de " + v.dato + ":");
             MostrarConexiones(v);
         }
-
-        //opcion 4 y 5: pide origen y destino y calcula la ruta (BFS o DFS)
         public void BuscarRuta(string metodo)
         {
             Console.WriteLine("\n--- ESTACIONES ---");
@@ -268,8 +225,6 @@ namespace Biblioteca
             Console.WriteLine("Estaciones en la ruta: " + ruta.Contar());
             Console.WriteLine("Tiempo total: " + minutos + " min");
         }
-
-        //opcion 6: el recorrido manual (usa el Recorrer de la base)
         public void ViajarManual()
         {
             Console.WriteLine("\n--- VIAJE MANUAL ---");
@@ -278,8 +233,6 @@ namespace Biblioteca
             Recorrer(GetInicio(), ref total);
             Console.WriteLine("\nTiempo total del viaje: " + total + " min");
         }
-
-        //opcion 7: busca una estacion por su codigo USANDO EL ARBOL (ABB)
         public void BuscarPorCodigo()
         {
             Console.WriteLine("\n--- ESTACIONES (el numero es el codigo) ---");
@@ -295,11 +248,6 @@ namespace Biblioteca
             }
             Console.WriteLine("Encontrada (codigo " + cod + "): " + e);
         }
-
-        //------------------------------------------------------
-        // RECORRIDOS
-        //------------------------------------------------------
-        //pone visitado=false y anterior=null en todas las estaciones
         void LimpiarMarcas()
         {
             Vertice temp = l_vertices.primero;
@@ -310,8 +258,6 @@ namespace Biblioteca
                 temp = temp.sig;
             }
         }
-
-        //BFS: ruta con MENOS estaciones -> usa la COLA
         public ListaSimple RutaMasCorta(Vertice origen, Vertice destino, ref float minutos)
         {
             LimpiarMarcas();
@@ -352,8 +298,6 @@ namespace Biblioteca
             }
             return ReconstruirRuta(origen, destino, ref minutos);
         }
-
-        //DFS: recorre a lo profundo -> usa la PILA
         public ListaSimple RutaEnProfundidad(Vertice origen, Vertice destino, ref float minutos)
         {
             LimpiarMarcas();
@@ -397,9 +341,6 @@ namespace Biblioteca
             }
             return ReconstruirRuta(origen, destino, ref minutos);
         }
-
-        //arma la ruta yendo del destino hacia atras con 'anterior'.
-        //como sale al reves, uso una PILA para voltearla. De paso suma los minutos.
         ListaSimple ReconstruirRuta(Vertice origen, Vertice destino, ref float minutos)
         {
             Pila pila = new Pila();
@@ -427,8 +368,6 @@ namespace Biblioteca
             }
             return ruta;
         }
-
-        //cuantos minutos hay entre dos estaciones que estan conectadas
         float PesoEntre(Vertice a, Vertice b)
         {
             Arista temp = a.ls.primero;
@@ -442,8 +381,6 @@ namespace Biblioteca
             }
             return 0;
         }
-
-        //recorrido MANUAL: el usuario elige a que estacion viajar (viene de la base)
         public void Recorrer(Vertice v, ref float total)
         {
             Console.WriteLine("--------------------------------");
@@ -466,7 +403,6 @@ namespace Biblioteca
                 temp = temp.sig;
             }
             total = total + temp.peso;
-            //sigo el viaje desde la estacion elegida
             Recorrer(temp.destino, ref total);
         }
     }

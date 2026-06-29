@@ -10,9 +10,6 @@
         {
             return string.Format("{0} (Zona: {1})", nombre, zona);
         }
-
-        //el arbol (ABB) compara las estaciones por su codigo,
-        //igual que Persona se compara por el dni
         public static bool operator >(Estacion e1, Estacion e2)
         {
             if (e1.codigo > e2.codigo) return true;

@@ -9,8 +9,7 @@ namespace Biblioteca
     public class Arista
     {
         public Vertice destino;
-        public float peso;      //minutos que se tarda entre las dos estaciones
-        //lista simple
+        public float peso;
         public Arista sig = null;
     }
 }

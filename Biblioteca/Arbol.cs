@@ -32,7 +32,6 @@ namespace Biblioteca
                 {
                     InsertarRecursivo(ref raiz.der, e);
                 }
-                //si el codigo ya existe, no se inserta de nuevo
             }
         }
 
@@ -64,9 +63,6 @@ namespace Biblioteca
                 }
             }
         }
-
-        //recorrido en orden (izquierda - raiz - derecha):
-        //muestra las estaciones ordenadas por codigo
         public void InOrden(Nodo raiz)
         {
             if (raiz != null)
