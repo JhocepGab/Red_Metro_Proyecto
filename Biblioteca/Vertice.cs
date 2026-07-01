@@ -7,5 +7,6 @@
         public ListaAristas ls = new ListaAristas();
         public bool visitado = false;
         public Vertice anterior = null;
+        public float distancia = 0;
     }
 }

@@ -209,9 +209,13 @@ namespace Biblioteca
             {
                 ruta = RutaMasCorta(origen, destino, ref minutos);
             }
-            else
+            else if (metodo == "DFS")
             {
                 ruta = RutaEnProfundidad(origen, destino, ref minutos);
+            }
+            else
+            {
+                ruta = RutaMasRapida(origen, destino, ref minutos);
             }
 
             if (ruta == null)
@@ -341,6 +345,66 @@ namespace Biblioteca
             }
             return ReconstruirRuta(origen, destino, ref minutos);
         }
+        public ListaSimple RutaMasRapida(Vertice origen, Vertice destino, ref float minutos)
+        {
+            LimpiarMarcas();
+            float infinito = 1000000;
+            Vertice t = l_vertices.primero;
+            while (t != null)
+            {
+                t.distancia = infinito;
+                t = t.sig;
+            }
+            origen.distancia = 0;
+
+            bool termino = false;
+            while (!termino)
+            {
+                Vertice actual = null;
+                float menor = infinito;
+                Vertice temp = l_vertices.primero;
+                while (temp != null)
+                {
+                    if (!temp.visitado && temp.distancia < menor)
+                    {
+                        menor = temp.distancia;
+                        actual = temp;
+                    }
+                    temp = temp.sig;
+                }
+
+                if (actual == null)
+                {
+                    termino = true;
+                }
+                else
+                {
+                    actual.visitado = true;
+                    Arista a = actual.ls.primero;
+                    while (a != null)
+                    {
+                        if (!a.destino.visitado)
+                        {
+                            float nueva = actual.distancia + a.peso;
+                            if (nueva < a.destino.distancia)
+                            {
+                                a.destino.distancia = nueva;
+                                a.destino.anterior = actual;
+                            }
+                        }
+                        a = a.sig;
+                    }
+                }
+            }
+
+            if (destino.distancia >= infinito)
+            {
+                minutos = 0;
+                return null;
+            }
+            return ReconstruirRuta(origen, destino, ref minutos);
+        }
+
         ListaSimple ReconstruirRuta(Vertice origen, Vertice destino, ref float minutos)
         {
             Pila pila = new Pila();

@@ -23,11 +23,12 @@ namespace Red_Metro_EF
                 Console.WriteLine("1. Ver estaciones");
                 Console.WriteLine("2. Ver matriz de adyacencia");
                 Console.WriteLine("3. Ver conexiones de una estacion");
-                Console.WriteLine("4. Ruta con menos estaciones (BFS - cola)");
-                Console.WriteLine("5. Recorrido en profundidad (DFS - pila)");
+                Console.WriteLine("4. Ruta con menos estaciones");
+                Console.WriteLine("5. Recorrido en profundidad");
                 Console.WriteLine("6. Viajar manualmente por la red");
-                Console.WriteLine("7. Buscar estacion por codigo (ABB - arbol)");
-                Console.WriteLine("8. Estaciones ordenadas por codigo (ABB - InOrden)");
+                Console.WriteLine("7. Buscar estacion por codigo");
+                Console.WriteLine("8. Estaciones ordenadas por codigo");
+                Console.WriteLine("9. Ruta mas rapida (menos minutos - Dijkstra)");
                 Console.WriteLine("0. Salir");
                 Console.WriteLine("--------------------------------------------------");
                 Console.Write("Elija una opcion: ");
@@ -74,9 +75,14 @@ namespace Red_Metro_EF
                         break;
 
                     case 8:
-                        Console.WriteLine("\n--- ESTACIONES ORDENADAS POR CODIGO (recorrido InOrden del arbol) ---");
+                        Console.WriteLine("\n--- ESTACIONES ORDENADAS POR CODIGO ---");
                         g.MostrarOrdenadasPorCodigo();
                         Console.ReadKey();
+                        break;
+                    case 9:
+                        g.BuscarRuta("DIJKSTRA");
+                        Console.WriteLine("\nPresione ENTER para continuar...");
+                        Console.ReadLine();
                         break;
 
                     case 0:
